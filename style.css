@@ -1,252 +1,395 @@
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+html,
 body {
-    font-family: Arial, Helvetica, sans-serif;
-    background: #eaf6ff;
-    color: #173b61;
+    width: 100%;
+    height: 100%;
     overflow: hidden;
+}
+
+body {
+    font-family: "Plus Jakarta Sans", sans-serif;
+    background: #f7fbff;
+    color: #17324d;
 }
 
 .presentation {
     width: 100vw;
     height: 100vh;
     position: relative;
-
-    background:
-        radial-gradient(
-            circle at 90% 10%,
-            rgba(75, 170, 240, 0.25),
-            transparent 30%
-        ),
-        radial-gradient(
-            circle at 5% 90%,
-            rgba(110, 200, 255, 0.20),
-            transparent 30%
-        ),
-        linear-gradient(
-            135deg,
-            #ffffff,
-            #eef8ff
-        );
+    overflow: hidden;
 }
 
 
-/* SLIDE */
+/* ===============================
+   SLIDE
+================================ */
 
 .slide {
-    display: none;
+    position: absolute;
+    inset: 0;
 
     width: 100%;
     height: 100%;
 
-    padding: 55px 8%;
-
+    display: flex;
     align-items: center;
     justify-content: center;
 
-    position: absolute;
-    inset: 0;
+    padding: 30px 40px;
+
+    opacity: 0;
+    visibility: hidden;
+
+    transform: translateY(12px);
+
+    transition:
+        opacity 0.4s ease,
+        transform 0.4s ease;
+
+    background:
+        radial-gradient(
+            circle at 8% 10%,
+            rgba(33, 150, 243, 0.10),
+            transparent 28%
+        ),
+        #f8fbff;
 }
 
 .slide.active {
-    display: flex;
-    animation: fadeSlide 0.4s ease;
-}
-
-@keyframes fadeSlide {
-
-    from {
-        opacity: 0;
-        transform: translateX(25px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
 }
 
 
-/* CONTENT */
+/* ===============================
+   CONTENT
+================================ */
 
 .content {
-    width: 100%;
-    max-width: 1200px;
-    position: relative;
-    z-index: 2;
+    width: 94%;
+    max-width: 1250px;
+
+    transform: translateY(-3vh);
 }
-
-
-/* COVER */
-
-.cover {
-    text-align: center;
-    position: relative;
-    z-index: 2;
-}
-
-.school {
-    color: #2785c5;
-    font-size: 16px;
-    font-weight: bold;
-    letter-spacing: 5px;
-    margin-bottom: 15px;
-}
-
-.cover h1 {
-    font-size: 145px;
-    line-height: 0.9;
-    color: #2176b5;
-    font-weight: 800;
-}
-
-.cover h2 {
-    margin-top: 25px;
-    font-size: 55px;
-    line-height: 1.15;
-    color: #173b61;
-}
-
-.subtitle {
-    margin-top: 30px;
-    font-size: 14px;
-    letter-spacing: 4px;
-    color: #66829b;
-}
-
-
-/* TITLE */
 
 .number {
-    color: #2a91d5;
+    color: #1976d2;
+
     font-size: 13px;
-    font-weight: bold;
+
+    font-weight: 800;
+
     letter-spacing: 4px;
-    margin-bottom: 5px;
+
+    margin-bottom: 6px;
 }
+
+
+/* ===============================
+   JUDUL
+================================ */
 
 .content > h2 {
-    font-size: 42px;
-    color: #173b61;
-    margin-bottom: 22px;
-    font-weight: 800;
+    color: #0b3d91;
+
+    font-family: "Poppins", sans-serif;
+
+    font-size: clamp(30px, 3.5vw, 47px);
+
+    font-weight: 900;
+
+    line-height: 1;
+
+    letter-spacing: -1.5px;
+
+    margin-bottom: 24px;
+
+    text-shadow:
+        0 2px 0 rgba(13, 71, 161, 0.08);
 }
 
 
-/* GROUPS */
+/* ===============================
+   PERLENGKAPAN PRIBADI
+================================ */
 
-.groups {
+.personal-list {
     display: grid;
 
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns:
+        repeat(3, 1fr);
 
-    gap: 25px 45px;
+    gap: 7px 45px;
 }
 
-.group h3 {
-    color: #2184c7;
-    font-size: 20px;
-    margin-bottom: 8px;
-}
-
-.group-members {
+.personal-list > div {
     display: flex;
+
     flex-direction: column;
-    gap: 3px;
+
+    gap: 5px;
 }
 
-.group-members p {
-    color: #355a78;
-    font-size: 14px;
+.personal-list p {
+    color: #29465f;
+
+    font-size: clamp(14px, 1.35vw, 19px);
+
+    font-weight: 600;
+
     line-height: 1.35;
 }
 
 
-/* LIST */
+/* ===============================
+   KEBUTUHAN KELOMPOK
+================================ */
 
-.simple-list {
-    display: flex;
-    flex-direction: column;
-    gap: 11px;
+.group-needs {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 16px 70px;
+
+    max-width: 1000px;
 }
 
-.simple-list p {
-    font-size: 19px;
-    color: #355a78;
-    line-height: 1.5;
+.group-needs p {
+    color: #29465f;
+
+    font-size: clamp(18px, 1.7vw, 23px);
+
+    font-weight: 700;
+
+    line-height: 1.4;
 }
 
 
-/* TEKA-TEKI */
+/* ===============================
+   TEKA-TEKI
+================================ */
 
 .note {
-    color: #2587d5;
-    font-size: 16px;
-    font-weight: bold;
+    color: #1976d2;
 
-    margin-top: -12px;
-    margin-bottom: 18px;
+    font-size: 15px;
+
+    font-weight: 700;
+
+    margin-bottom: 15px;
 }
 
 .riddle-list {
     display: grid;
 
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns:
+        repeat(2, 1fr);
 
-    column-gap: 100px;
+    gap: 65px;
+
+    max-width: 1000px;
+}
+
+.riddle-list > div {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 6px;
 }
 
 .riddle-list p {
-    font-size: 18px;
-    color: #355a78;
-    line-height: 1.7;
+    color: #29465f;
+
+    font-size: clamp(16px, 1.5vw, 21px);
+
+    font-weight: 600;
+
+    line-height: 1.4;
 }
 
 
-/* PERLENGKAPAN */
+/* ===============================
+   KELOMPOK
+================================ */
 
-.personal-list {
+.groups {
     display: grid;
 
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns:
+        repeat(3, 1fr);
 
-    column-gap: 100px;
-}
+    gap: 13px;
 
-.personal-list p {
-    font-size: 18px;
-    color: #355a78;
-    line-height: 1.7;
+    width: 100%;
 }
 
 
-/* NAVIGATION */
+/* CARD KELOMPOK */
+
+.group {
+    background: rgba(255, 255, 255, 0.96);
+
+    border-top: 4px solid #1976d2;
+
+    border-radius: 14px;
+
+    padding: 13px 15px;
+
+    box-shadow:
+        0 7px 20px rgba(13, 71, 161, 0.09);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.group:hover {
+    transform: translateY(-4px);
+
+    box-shadow:
+        0 12px 28px rgba(13, 71, 161, 0.15);
+}
+
+
+/* NAMA KELOMPOK */
+
+.group h3 {
+    color: #0b3d91;
+
+    font-family: "Poppins", sans-serif;
+
+    font-size: clamp(20px, 1.9vw, 26px);
+
+    font-weight: 900;
+
+    letter-spacing: 1.5px;
+
+    line-height: 1;
+
+    margin-bottom: 10px;
+
+    text-shadow:
+        0 2px 0 rgba(13, 71, 161, 0.08);
+}
+
+
+/* NAMA ANGGOTA */
+
+.group p {
+    color: #34495e;
+
+    font-size: clamp(14px, 1.15vw, 16px);
+
+    font-weight: 600;
+
+    line-height: 1.32;
+
+    letter-spacing: -0.2px;
+}
+
+
+/* ===============================
+   COVER
+================================ */
+
+.cover {
+    text-align: center;
+}
+
+.school {
+    color: #1976d2;
+
+    font-size: clamp(18px, 2vw, 27px);
+
+    font-weight: 800;
+
+    letter-spacing: 5px;
+
+    margin-bottom: 12px;
+}
+
+.cover h1 {
+    font-family: "Poppins", sans-serif;
+
+    color: #0b3d91;
+
+    font-size: clamp(90px, 14vw, 180px);
+
+    line-height: 0.85;
+
+    font-weight: 900;
+
+    letter-spacing: -8px;
+
+    text-shadow:
+        0 4px 0 rgba(13, 71, 161, 0.08);
+}
+
+.cover h2 {
+    color: #173f67;
+
+    font-family: "Poppins", sans-serif;
+
+    font-size: clamp(30px, 4vw, 52px);
+
+    line-height: 1.05;
+
+    margin-top: 25px;
+
+    font-weight: 800;
+
+    letter-spacing: -1.5px;
+}
+
+.subtitle {
+    display: inline-block;
+
+    margin-top: 25px;
+
+    padding: 10px 23px;
+
+    border-radius: 30px;
+
+    background: #1565c0;
+
+    color: white;
+
+    font-size: 15px;
+
+    font-weight: 800;
+
+    letter-spacing: 2px;
+
+    box-shadow:
+        0 6px 18px rgba(13, 71, 161, 0.18);
+}
+
+
+/* ===============================
+   NAVIGASI
+================================ */
 
 .navigation {
     position: fixed;
 
-    bottom: 25px;
-    left: 50%;
-
-    transform: translateX(-50%);
-
-    z-index: 100;
+    right: 25px;
+    bottom: 20px;
 
     display: flex;
-    gap: 12px;
 
-    opacity: 1;
+    gap: 10px;
 
-    transition: opacity 0.5s ease;
-}
-
-.navigation.hidden {
-    opacity: 0;
-    pointer-events: none;
+    z-index: 100;
 }
 
 .navigation button {
@@ -254,102 +397,182 @@ body {
     height: 45px;
 
     border: none;
+
     border-radius: 50%;
 
-    background: #278bd0;
+    background: #0b3d91;
+
     color: white;
 
-    font-size: 20px;
+    font-size: 22px;
+
+    font-weight: 800;
 
     cursor: pointer;
 
     box-shadow:
-        0 6px 15px rgba(30, 100, 150, 0.2);
+        0 5px 15px rgba(13, 71, 161, 0.2);
+
+    transition: 0.2s ease;
 }
 
 .navigation button:hover {
-    background: #1769a7;
+    transform: scale(1.08);
+
+    background: #1565c0;
 }
 
 
-/* DECORATION */
+/* ===============================
+   LAPTOP
+================================ */
 
-.presentation::before {
-    content: "";
+@media (max-width: 1000px) {
 
-    position: absolute;
-
-    width: 350px;
-    height: 350px;
-
-    border-radius: 50%;
-
-    border: 2px solid rgba(40, 140, 210, 0.08);
-
-    right: -100px;
-    bottom: -100px;
-}
-
-.presentation::after {
-    content: "";
-
-    position: absolute;
-
-    width: 170px;
-    height: 170px;
-
-    border-radius: 50%;
-
-    border: 2px solid rgba(40, 140, 210, 0.07);
-
-    left: -70px;
-    top: 70px;
-}
-
-
-/* RESPONSIVE */
-
-@media (max-width: 900px) {
-
-    .groups {
-        grid-template-columns: 1fr 1fr;
-        gap: 18px 30px;
+    .slide {
+        padding: 25px;
     }
 
-    .group-members p {
-        font-size: 12px;
+    .content {
+        width: 96%;
+
+        transform: translateY(-2vh);
     }
 
     .content > h2 {
-        font-size: 35px;
+        font-size: 32px;
+
+        margin-bottom: 18px;
+    }
+
+    .personal-list {
+        gap: 5px 25px;
+    }
+
+    .personal-list p {
+        font-size: 14px;
+    }
+
+
+    /* KELOMPOK */
+
+    .groups {
+        gap: 9px;
+    }
+
+    .group {
+        padding: 10px;
+    }
+
+    .group h3 {
+        font-size: 21px;
+    }
+
+    .group p {
+        font-size: 13px;
+
+        line-height: 1.25;
     }
 }
 
-@media (max-width: 600px) {
+
+/* ===============================
+   HP
+================================ */
+
+@media (max-width: 650px) {
 
     .slide {
-        padding: 40px 7%;
+        padding: 15px;
     }
 
-    .groups {
+    .content {
+        width: 100%;
+
+        transform: translateY(-1vh);
+    }
+
+    .content > h2 {
+        font-size: 25px;
+
+        margin-bottom: 15px;
+    }
+
+
+    /* PRIBADI */
+
+    .personal-list {
+        grid-template-columns:
+            repeat(3, 1fr);
+
+        gap: 5px 15px;
+    }
+
+    .personal-list p {
+        font-size: 11px;
+    }
+
+
+    /* KEBUTUHAN */
+
+    .group-needs {
         grid-template-columns: 1fr;
-        gap: 15px;
+
+        gap: 9px;
     }
 
-    .group-members p {
+    .group-needs p {
+        font-size: 16px;
+    }
+
+
+    /* TEKA-TEKI */
+
+    .riddle-list {
+        grid-template-columns:
+            repeat(2, 1fr);
+
+        gap: 25px;
+    }
+
+    .riddle-list p {
         font-size: 13px;
     }
 
-    .cover h1 {
-        font-size: 90px;
+
+    /* KELOMPOK */
+
+    .groups {
+        grid-template-columns:
+            repeat(3, 1fr);
+
+        gap: 6px;
     }
 
-    .cover h2 {
-        font-size: 32px;
+    .group {
+        padding: 7px;
     }
 
-    .riddle-list,
-    .personal-list {
-        grid-template-columns: 1fr;
+    .group h3 {
+        font-size: 14px;
+
+        margin-bottom: 5px;
+    }
+
+    .group p {
+        font-size: 9px;
+
+        line-height: 1.2;
+    }
+
+
+    .navigation {
+        right: 12px;
+        bottom: 12px;
+    }
+
+    .navigation button {
+        width: 40px;
+        height: 40px;
     }
 }

@@ -1,187 +1,152 @@
+
+
 const slides = document.querySelectorAll(".slide");
 
-const nextBtn = document.getElementById("nextBtn");
 const prevBtn = document.getElementById("prevBtn");
+const nextBtn = document.getElementById("nextBtn");
 
-const navigation = document.getElementById("navigation");
+
+/* ==================================================
+   SLIDE STATE
+================================================== */
 
 let currentSlide = 0;
 
-let hideTimer;
 
-
-/* =========================
-   TAMPILKAN SLIDE
-========================= */
+/* ==================================================
+   SHOW SLIDE
+================================================== */
 
 function showSlide(index) {
 
+    if (index < 0) {
+        index = slides.length - 1;
+    }
+
     if (index >= slides.length) {
-        currentSlide = 0;
+        index = 0;
     }
 
-    else if (index < 0) {
-        currentSlide = slides.length - 1;
-    }
+    slides.forEach((slide, i) => {
 
-    else {
-        currentSlide = index;
-    }
+        slide.classList.toggle(
+            "active",
+            i === index
+        );
 
-
-    slides.forEach(function(slide) {
-        slide.classList.remove("active");
     });
 
-
-    slides[currentSlide].classList.add("active");
+    currentSlide = index;
 }
 
 
-/* =========================
-   NEXT
-========================= */
+/* ==================================================
+   NEXT SLIDE
+================================================== */
 
 function nextSlide() {
     showSlide(currentSlide + 1);
 }
 
 
-/* =========================
-   PREVIOUS
-========================= */
+/* ==================================================
+   PREVIOUS SLIDE
+================================================== */
 
-function prevSlide() {
+function previousSlide() {
     showSlide(currentSlide - 1);
 }
 
 
-/* =========================
-   TOMBOL
-========================= */
+/* ==================================================
+   BUTTON
+================================================== */
 
-nextBtn.addEventListener("click", function() {
-    nextSlide();
-    showNavigation();
-});
+nextBtn.addEventListener(
+    "click",
+    nextSlide
+);
 
-prevBtn.addEventListener("click", function() {
-    prevSlide();
-    showNavigation();
-});
+prevBtn.addEventListener(
+    "click",
+    previousSlide
+);
 
 
-/* =========================
+/* ==================================================
    KEYBOARD
-========================= */
+================================================== */
 
-document.addEventListener("keydown", function(event) {
+document.addEventListener(
+    "keydown",
+    function (event) {
 
-    if (event.key === "ArrowRight" || event.key === "ArrowDown") {
-        nextSlide();
-        showNavigation();
-    }
+        if (
+            event.key === "ArrowRight" ||
+            event.key === " "
+        ) {
 
-    if (event.key === "ArrowLeft" || event.key === "ArrowUp") {
-        prevSlide();
-        showNavigation();
-    }
+            event.preventDefault();
 
-    if (event.key === " ") {
-        event.preventDefault();
-        nextSlide();
-        showNavigation();
-    }
-
-});
-
-
-/* =========================
-   NAVIGASI HILANG OTOMATIS
-========================= */
-
-function hideNavigation() {
-
-    navigation.classList.add("hidden");
-
-}
-
-
-function showNavigation() {
-
-    navigation.classList.remove("hidden");
-
-    clearTimeout(hideTimer);
-
-    hideTimer = setTimeout(function() {
-        hideNavigation();
-    }, 3000);
-
-}
-
-
-/* =========================
-   MOUSE
-========================= */
-
-document.addEventListener("mousemove", function() {
-
-    showNavigation();
-
-});
-
-
-/* =========================
-   FULLSCREEN
-   Tekan F
-========================= */
-
-document.addEventListener("keydown", function(event) {
-
-    if (event.key.toLowerCase() === "f") {
-
-        if (!document.fullscreenElement) {
-
-            document.documentElement.requestFullscreen();
-
+            nextSlide();
         }
 
-        else {
 
-            document.exitFullscreen();
+        if (event.key === "ArrowLeft") {
+
+            event.preventDefault();
+
+            previousSlide();
+        }
+
+    }
+);
+
+
+/* ==================================================
+   TOUCH / SWIPE
+================================================== */
+
+let touchStartX = 0;
+let touchEndX = 0;
+
+
+document.addEventListener(
+    "touchstart",
+    function (event) {
+
+        touchStartX =
+            event.changedTouches[0].screenX;
+
+    }
+);
+
+
+document.addEventListener(
+    "touchend",
+    function (event) {
+
+        touchEndX =
+            event.changedTouches[0].screenX;
+
+        const difference =
+            touchStartX - touchEndX;
+
+
+        if (Math.abs(difference) > 50) {
+
+            if (difference > 0) {
+
+                nextSlide();
+
+            } else {
+
+                previousSlide();
+
+            }
 
         }
 
     }
+);
 
-});
-
-
-/* =========================
-   DOUBLE CLICK FULLSCREEN
-========================= */
-
-document.addEventListener("dblclick", function() {
-
-    if (!document.fullscreenElement) {
-
-        document.documentElement.requestFullscreen();
-
-    }
-
-    else {
-
-        document.exitFullscreen();
-
-    }
-
-});
-
-
-/* =========================
-   MULAI
-========================= */
-
-showSlide(0);
-
-showNavigation();
