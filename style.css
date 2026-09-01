@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Poppins:wght@600;700;800;900&display=swap');
+
+
+/* ==================================================
+   RESET
+================================================== */
 
 * {
     margin: 0;
@@ -5,168 +11,321 @@
     box-sizing: border-box;
 }
 
+
 html,
 body {
     width: 100%;
     height: 100%;
-    overflow: hidden;
 }
+
 
 body {
     font-family: "Plus Jakarta Sans", sans-serif;
-    background: #f7fbff;
+
+    background: #f5faff;
+
     color: #17324d;
 }
+
+
+/* ==================================================
+   PRESENTATION
+================================================== */
 
 .presentation {
     width: 100vw;
     height: 100vh;
+
     position: relative;
+
     overflow: hidden;
 }
 
 
-/* ===============================
+/* ==================================================
    SLIDE
-================================ */
+================================================== */
 
 .slide {
     position: absolute;
+
     inset: 0;
 
     width: 100%;
     height: 100%;
 
     display: flex;
-    align-items: center;
+
     justify-content: center;
 
-    padding: 30px 40px;
+    padding: 45px 45px 85px;
 
     opacity: 0;
+
     visibility: hidden;
 
-    transform: translateY(12px);
+    transform: translateY(15px);
 
     transition:
-        opacity 0.4s ease,
-        transform 0.4s ease;
+        opacity 0.45s ease,
+        transform 0.45s ease;
 
     background:
         radial-gradient(
-            circle at 8% 10%,
-            rgba(33, 150, 243, 0.10),
-            transparent 28%
+            circle at 8% 8%,
+            rgba(33, 150, 243, 0.12),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 95% 90%,
+            rgba(21, 101, 192, 0.07),
+            transparent 30%
         ),
         #f8fbff;
+
+    overflow-y: auto;
+
+    overflow-x: hidden;
 }
+
 
 .slide.active {
     opacity: 1;
+
     visibility: visible;
+
     transform: translateY(0);
 }
 
 
-/* ===============================
-   CONTENT
-================================ */
+/* ==================================================
+   CONTENT DASAR
+================================================== */
 
 .content {
     width: 94%;
+
     max-width: 1250px;
 
-    transform: translateY(-3vh);
+    margin: 0 auto;
+
+    padding-bottom: 30px;
 }
+
+
+/* ==================================================
+   POSISI BERDASARKAN ISI
+================================================== */
+
+/*
+   Default:
+   Konten tidak terlalu panjang → berada di tengah.
+*/
+
+.slide:not(:nth-child(2)):not(:nth-child(5)) {
+    align-items: center;
+}
+
+
+/*
+   Slide 2:
+   Perlengkapan pribadi banyak → agak atas.
+*/
+
+.slide:nth-child(2) {
+    align-items: flex-start;
+}
+
+
+/*
+   Slide 5:
+   Nama kelompok banyak → agak atas.
+*/
+
+.slide:nth-child(5) {
+    align-items: flex-start;
+}
+
+
+/* ==================================================
+   POSISI KONTEN
+================================================== */
+
+.slide:nth-child(2) .content,
+.slide:nth-child(5) .content {
+    margin-top: 0;
+}
+
+
+/*
+   Slide sedikit konten.
+   Sedikit naik supaya visual tetap seimbang.
+*/
+
+.slide:nth-child(3) .content,
+.slide:nth-child(4) .content {
+    transform: translateY(-1vh);
+}
+
+
+/* ==================================================
+   NOMOR
+================================================== */
 
 .number {
+    display: inline-block;
+
     color: #1976d2;
 
-    font-size: 13px;
-
-    font-weight: 800;
-
-    letter-spacing: 4px;
-
-    margin-bottom: 6px;
-}
-
-
-/* ===============================
-   JUDUL
-================================ */
-
-.content > h2 {
-    color: #0b3d91;
-
-    font-family: "Poppins", sans-serif;
-
-    font-size: clamp(30px, 3.5vw, 47px);
+    font-size: 14px;
 
     font-weight: 900;
 
-    line-height: 1;
+    letter-spacing: 4px;
 
-    letter-spacing: -1.5px;
+    margin-bottom: 9px;
 
-    margin-bottom: 24px;
-
-    text-shadow:
-        0 2px 0 rgba(13, 71, 161, 0.08);
+    position: relative;
 }
 
 
-/* ===============================
+/*
+   Garis kecil setelah nomor
+*/
+
+.number::after {
+    content: "";
+
+    display: inline-block;
+
+    width: 28px;
+
+    height: 3px;
+
+    margin-left: 10px;
+
+    vertical-align: middle;
+
+    border-radius: 10px;
+
+    background: #1976d2;
+}
+
+
+/* ==================================================
+   JUDUL
+================================================== */
+
+.content > h2 {
+    position: relative;
+
+    color: #0a3b87;
+
+    font-family: "Poppins", sans-serif;
+
+    font-size: clamp(34px, 3.7vw, 50px);
+
+    font-weight: 900;
+
+    line-height: 1.02;
+
+    letter-spacing: -2px;
+
+    margin-bottom: 28px;
+
+    text-transform: uppercase;
+
+    text-shadow:
+        0 2px 0 rgba(13, 71, 161, 0.08);
+
+    /*
+       Efek depth ringan
+    */
+    filter:
+        drop-shadow(
+            0 4px 8px
+            rgba(11, 61, 145, 0.08)
+        );
+}
+
+
+/*
+   Accent kecil di bawah judul
+*/
+
+.content > h2::after {
+    content: "";
+
+    display: block;
+
+    width: 58px;
+
+    height: 5px;
+
+    margin-top: 10px;
+
+    border-radius: 20px;
+
+    background: #1976d2;
+}
+
+
+/* ==================================================
    PERLENGKAPAN PRIBADI
-================================ */
+================================================== */
 
 .personal-list {
     display: grid;
 
     grid-template-columns:
-        repeat(3, 1fr);
+        repeat(3, minmax(0, 1fr));
 
-    gap: 7px 45px;
+    gap: 9px 45px;
 }
+
 
 .personal-list > div {
     display: flex;
 
     flex-direction: column;
 
-    gap: 5px;
+    gap: 7px;
 }
+
 
 .personal-list p {
     color: #29465f;
 
-    font-size: clamp(14px, 1.35vw, 19px);
+    font-size: clamp(16px, 1.45vw, 20px);
 
     font-weight: 600;
 
-    line-height: 1.35;
+    line-height: 1.38;
+
+    letter-spacing: -0.25px;
 }
 
 
-/* ===============================
+/* ==================================================
    KEBUTUHAN KELOMPOK
-================================ */
+================================================== */
 
 .group-needs {
     display: grid;
 
     grid-template-columns:
-        repeat(2, 1fr);
+        repeat(2, minmax(0, 1fr));
 
-    gap: 16px 70px;
+    gap: 18px 70px;
 
-    max-width: 1000px;
+    max-width: 1050px;
 }
+
 
 .group-needs p {
     color: #29465f;
 
-    font-size: clamp(18px, 1.7vw, 23px);
+    font-size: clamp(19px, 1.8vw, 25px);
 
     font-weight: 700;
 
@@ -174,43 +333,46 @@ body {
 }
 
 
-/* ===============================
+/* ==================================================
    TEKA-TEKI
-================================ */
+================================================== */
 
 .note {
     color: #1976d2;
 
-    font-size: 15px;
+    font-size: 16px;
 
-    font-weight: 700;
+    font-weight: 800;
 
-    margin-bottom: 15px;
+    margin-bottom: 20px;
 }
+
 
 .riddle-list {
     display: grid;
 
     grid-template-columns:
-        repeat(2, 1fr);
+        repeat(2, minmax(0, 1fr));
 
     gap: 65px;
 
-    max-width: 1000px;
+    max-width: 1050px;
 }
+
 
 .riddle-list > div {
     display: flex;
 
     flex-direction: column;
 
-    gap: 6px;
+    gap: 8px;
 }
+
 
 .riddle-list p {
     color: #29465f;
 
-    font-size: clamp(16px, 1.5vw, 21px);
+    font-size: clamp(18px, 1.6vw, 22px);
 
     font-weight: 600;
 
@@ -218,57 +380,67 @@ body {
 }
 
 
-/* ===============================
+/* ==================================================
    KELOMPOK
-================================ */
+================================================== */
 
 .groups {
     display: grid;
 
     grid-template-columns:
-        repeat(3, 1fr);
+        repeat(3, minmax(0, 1fr));
 
-    gap: 13px;
+    gap: 15px;
 
     width: 100%;
 }
 
 
-/* CARD KELOMPOK */
+/* ==================================================
+   CARD KELOMPOK
+================================================== */
 
 .group {
-    background: rgba(255, 255, 255, 0.96);
+    position: relative;
 
-    border-top: 4px solid #1976d2;
+    background:
+        rgba(255, 255, 255, 0.97);
 
-    border-radius: 14px;
+    border-radius: 16px;
 
-    padding: 13px 15px;
+    border-top: 5px solid #1976d2;
+
+    padding: 16px 17px;
 
     box-shadow:
-        0 7px 20px rgba(13, 71, 161, 0.09);
+        0 8px 25px
+        rgba(13, 71, 161, 0.09);
 
     transition:
         transform 0.2s ease,
         box-shadow 0.2s ease;
 }
 
+
 .group:hover {
     transform: translateY(-4px);
 
     box-shadow:
-        0 12px 28px rgba(13, 71, 161, 0.15);
+        0 14px 30px
+        rgba(13, 71, 161, 0.14);
 }
 
 
-/* NAMA KELOMPOK */
+/* ==================================================
+   NAMA KELOMPOK
+================================================== */
 
 .group h3 {
-    color: #0b3d91;
+    color: #0a3b87;
 
     font-family: "Poppins", sans-serif;
 
-    font-size: clamp(20px, 1.9vw, 26px);
+    font-size: clamp(24px, 2.1vw, 30px);
 
     font-weight: 900;
 
@@ -276,40 +448,59 @@ body {
 
     line-height: 1;
 
-    margin-bottom: 10px;
+    margin-bottom: 12px;
 
     text-shadow:
         0 2px 0 rgba(13, 71, 161, 0.08);
 }
 
 
-/* NAMA ANGGOTA */
+/* ==================================================
+   ANGGOTA
+================================================== */
 
 .group p {
     color: #34495e;
 
-    font-size: clamp(14px, 1.15vw, 16px);
+    font-size: clamp(15px, 1.25vw, 18px);
 
     font-weight: 600;
 
-    line-height: 1.32;
+    line-height: 1.4;
 
     letter-spacing: -0.2px;
 }
 
 
-/* ===============================
+/* ==================================================
    COVER
-================================ */
+================================================== */
 
 .cover {
+    width: 100%;
+
+    min-height: calc(100vh - 80px);
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
     text-align: center;
 }
+
+
+/* ==================================================
+   NAMA SEKOLAH
+================================================== */
 
 .school {
     color: #1976d2;
 
-    font-size: clamp(18px, 2vw, 27px);
+    font-size: clamp(20px, 2.2vw, 29px);
 
     font-weight: 800;
 
@@ -318,29 +509,40 @@ body {
     margin-bottom: 12px;
 }
 
+
+/* ==================================================
+   TAHUN
+================================================== */
+
 .cover h1 {
     font-family: "Poppins", sans-serif;
 
-    color: #0b3d91;
+    color: #0a3b87;
 
-    font-size: clamp(90px, 14vw, 180px);
+    font-size: clamp(100px, 15vw, 190px);
 
     line-height: 0.85;
 
     font-weight: 900;
 
-    letter-spacing: -8px;
+    letter-spacing: -9px;
 
     text-shadow:
-        0 4px 0 rgba(13, 71, 161, 0.08);
+        0 5px 0 rgba(13, 71, 161, 0.08),
+        0 12px 30px rgba(13, 71, 161, 0.08);
 }
+
+
+/* ==================================================
+   TAGLINE
+================================================== */
 
 .cover h2 {
     color: #173f67;
 
     font-family: "Poppins", sans-serif;
 
-    font-size: clamp(30px, 4vw, 52px);
+    font-size: clamp(32px, 4.2vw, 55px);
 
     line-height: 1.05;
 
@@ -348,15 +550,23 @@ body {
 
     font-weight: 800;
 
-    letter-spacing: -1.5px;
+    letter-spacing: -2px;
+
+    text-shadow:
+        0 3px 0 rgba(13, 71, 161, 0.06);
 }
+
+
+/* ==================================================
+   SUBTITLE
+================================================== */
 
 .subtitle {
     display: inline-block;
 
     margin-top: 25px;
 
-    padding: 10px 23px;
+    padding: 11px 26px;
 
     border-radius: 30px;
 
@@ -364,25 +574,27 @@ body {
 
     color: white;
 
-    font-size: 15px;
+    font-size: 16px;
 
     font-weight: 800;
 
     letter-spacing: 2px;
 
     box-shadow:
-        0 6px 18px rgba(13, 71, 161, 0.18);
+        0 7px 20px
+        rgba(13, 71, 161, 0.18);
 }
 
 
-/* ===============================
+/* ==================================================
    NAVIGASI
-================================ */
+================================================== */
 
 .navigation {
     position: fixed;
 
     right: 25px;
+
     bottom: 20px;
 
     display: flex;
@@ -390,11 +602,17 @@ body {
     gap: 10px;
 
     z-index: 100;
+
+    transition:
+        opacity 0.3s ease,
+        transform 0.3s ease;
 }
 
+
 .navigation button {
-    width: 45px;
-    height: 45px;
+    width: 46px;
+
+    height: 46px;
 
     border: none;
 
@@ -406,15 +624,19 @@ body {
 
     font-size: 22px;
 
-    font-weight: 800;
+    font-weight: 900;
 
     cursor: pointer;
 
     box-shadow:
-        0 5px 15px rgba(13, 71, 161, 0.2);
+        0 6px 18px
+        rgba(13, 71, 161, 0.22);
 
-    transition: 0.2s ease;
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease;
 }
+
 
 .navigation button:hover {
     transform: scale(1.08);
@@ -423,79 +645,122 @@ body {
 }
 
 
-/* ===============================
+/* ==================================================
+   NAVIGASI AUTO HIDE
+================================================== */
+
+.navigation.hide {
+    opacity: 0;
+
+    pointer-events: none;
+
+    transform: translateY(15px);
+}
+
+
+/* ==================================================
    LAPTOP
-================================ */
+================================================== */
 
 @media (max-width: 1000px) {
 
     .slide {
-        padding: 25px;
+        padding:
+            35px
+            25px
+            75px;
     }
+
 
     .content {
         width: 96%;
-
-        transform: translateY(-2vh);
     }
+
 
     .content > h2 {
-        font-size: 32px;
+        font-size: 34px;
 
-        margin-bottom: 18px;
+        margin-bottom: 22px;
     }
+
 
     .personal-list {
-        gap: 5px 25px;
+        gap: 7px 25px;
     }
 
+
     .personal-list p {
-        font-size: 14px;
+        font-size: 15px;
+    }
+
+
+    .group-needs p {
+        font-size: 19px;
+    }
+
+
+    .riddle-list p {
+        font-size: 17px;
     }
 
 
     /* KELOMPOK */
 
     .groups {
-        gap: 9px;
+        gap: 10px;
     }
+
 
     .group {
-        padding: 10px;
+        padding: 12px;
     }
+
 
     .group h3 {
-        font-size: 21px;
+        font-size: 23px;
     }
 
-    .group p {
-        font-size: 13px;
 
-        line-height: 1.25;
+    .group p {
+        font-size: 14px;
+
+        line-height: 1.3;
     }
 }
 
 
-/* ===============================
+/* ==================================================
    HP
-================================ */
+================================================== */
 
 @media (max-width: 650px) {
 
     .slide {
-        padding: 15px;
+        padding:
+            25px
+            15px
+            70px;
     }
+
 
     .content {
         width: 100%;
-
-        transform: translateY(-1vh);
     }
 
-    .content > h2 {
-        font-size: 25px;
 
-        margin-bottom: 15px;
+    .content > h2 {
+        font-size: 27px;
+
+        margin-bottom: 19px;
+
+        letter-spacing: -1px;
+    }
+
+
+    .content > h2::after {
+        width: 42px;
+
+        height: 4px;
     }
 
 
@@ -503,26 +768,30 @@ body {
 
     .personal-list {
         grid-template-columns:
-            repeat(3, 1fr);
+            repeat(2, minmax(0, 1fr));
 
-        gap: 5px 15px;
+        gap: 8px 18px;
     }
+
 
     .personal-list p {
-        font-size: 11px;
+        font-size: 12px;
+
+        line-height: 1.35;
     }
 
 
-    /* KEBUTUHAN */
+    /* KELOMPOK */
 
     .group-needs {
         grid-template-columns: 1fr;
 
-        gap: 9px;
+        gap: 11px;
     }
 
+
     .group-needs p {
-        font-size: 16px;
+        font-size: 17px;
     }
 
 
@@ -530,49 +799,108 @@ body {
 
     .riddle-list {
         grid-template-columns:
-            repeat(2, 1fr);
+            repeat(2, minmax(0, 1fr));
 
         gap: 25px;
     }
 
+
     .riddle-list p {
-        font-size: 13px;
+        font-size: 14px;
     }
 
 
-    /* KELOMPOK */
+    /* CARD KELOMPOK */
 
     .groups {
         grid-template-columns:
-            repeat(3, 1fr);
+            repeat(2, minmax(0, 1fr));
 
-        gap: 6px;
+        gap: 8px;
     }
+
 
     .group {
-        padding: 7px;
+        padding: 10px;
     }
+
 
     .group h3 {
-        font-size: 14px;
+        font-size: 18px;
 
-        margin-bottom: 5px;
+        margin-bottom: 7px;
     }
+
 
     .group p {
-        font-size: 9px;
+        font-size: 11px;
 
-        line-height: 1.2;
+        line-height: 1.25;
     }
 
+
+    /* COVER */
+
+    .school {
+        font-size: 17px;
+
+        letter-spacing: 3px;
+    }
+
+
+    .cover h1 {
+        font-size: 100px;
+    }
+
+
+    .cover h2 {
+        font-size: 30px;
+    }
+
+
+    .subtitle {
+        font-size: 13px;
+
+        padding: 9px 20px;
+    }
+
+
+    /* NAVIGASI */
 
     .navigation {
         right: 12px;
+
         bottom: 12px;
     }
 
+
     .navigation button {
         width: 40px;
+
         height: 40px;
+
+        font-size: 19px;
     }
+}
+
+
+/* ==================================================
+   SCROLLBAR
+================================================== */
+
+.slide::-webkit-scrollbar {
+    width: 6px;
+}
+
+
+.slide::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+
+.slide::-webkit-scrollbar-thumb {
+    background:
+        rgba(25, 118, 210, 0.35);
+
+    border-radius: 10px;
 }
